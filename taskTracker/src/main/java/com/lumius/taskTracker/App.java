@@ -1,13 +1,14 @@
 package com.lumius.taskTracker;
 
 /**
- * Hello world!
- *
+ * Task Tracker -- A command line tool to keep track of tasks
+ *@author Razvan Rotundu
  */
 public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Task test = new Task("testing");
+        System.out.println(test);
     }
 }
