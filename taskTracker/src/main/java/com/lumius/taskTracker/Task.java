@@ -3,13 +3,16 @@ package com.lumius.taskTracker;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  * Task -- Represents an individual task in the task tracker
  * @author Razvan Rotundu
  */
 public class Task {
 //	Formatting date/time to readable string
-	public static DateTimeFormatter taskDateFormat= DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
+	public static DateTimeFormatter taskDateFormat= DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");	
 	
 	private static int numTasks = 0;
 	

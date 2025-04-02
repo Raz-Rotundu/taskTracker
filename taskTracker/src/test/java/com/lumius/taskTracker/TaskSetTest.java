@@ -13,10 +13,10 @@ class TaskSetTest {
 	static void setup() {
 		referenceSet = new TaskSet();	
 		
-		referenceSet.add(new Task("foo"));
-		referenceSet.add(new Task("bar"));
-		referenceSet.add(new Task("baz"));
-		referenceSet.add(new Task("raz"));
+		referenceSet.add("foo");
+		referenceSet.add("bar");
+		referenceSet.add("baz");
+		referenceSet.add("raz");
 		
 		
 	}
