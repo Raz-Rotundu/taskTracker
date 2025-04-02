@@ -10,14 +10,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.NoSuchElementException;
 /**
- * Taskset -- A singleton set of task objects, serializable to JSON
+ * Taskset -- A set of task objects, serializable to JSON
  * @author Razvan Rotundu
  */
-public class TaskSet {
+public class TaskSet implements TasksInterface {
 	private Set<Task> tasks;
-	
-	
-//	Constructors
+
+
 	public TaskSet() {
 		tasks = new HashSet<Task>();
 	}
@@ -80,7 +79,7 @@ public class TaskSet {
 	 * @param newStat
 	 * @exception NoSuchElementException if given id does not exist in task set
 	 */
-	public void updateStatus(int id, Status newStat) throws NoSuchElementException{
+	public void updateStatus(int id, Status newStat) throws NoSuchElementException {
 		if(this.includes(id)) {
 			tasks.stream()
 			.forEach(task -> {
