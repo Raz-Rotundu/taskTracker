@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.NoSuchElementException;
 /**
  * Taskset -- A singleton set of task objects, serializable to JSON
  * @author Razvan Rotundu
@@ -24,9 +25,9 @@ public class TaskSet {
 	/**
 	 * Checks if the task set contains the given element by id
 	 * @param id The ID of the task searched for
-	 * @return true or false, if the given ID is in the set
+	 * @return boolean, if the given ID is in the set
 	 */
-	private boolean includes(int id) {
+	public boolean includes(int id) {
 		return tasks.stream()
 				.anyMatch(task -> task.getId() == id);
 	}
@@ -41,38 +42,56 @@ public class TaskSet {
 	/**
 	 * Remove a given task from the task set
 	 * @param id the Id of an existing task
+	 * @exception NoSuchElementException if given id does not exist in task set
 	 */
-	public void remove(int id) {
-		this.tasks = tasks.stream()
-		.filter(task -> task.getId() != id)
-		.collect(Collectors.toCollection(HashSet::new));
+	public void remove(int id) throws NoSuchElementException {
+		if(this.includes(id)) {
+			this.tasks = tasks.stream()
+					.filter(task -> task.getId() != id)
+					.collect(Collectors.toCollection(HashSet::new));
+		} else {
+			throw new NoSuchElementException();
+		}
+
 	}
 	
 	/**
 	 * Change the description of an existing task
 	 * @param id The id of an existing task
 	 * @param newDesc The new description for the task
+	 * @exception NoSuchElementException if given id does not exist in task set
 	 */
-	public void update(int id, String newDesc) {
-		tasks.stream()
-		.forEach(task -> {
-			if (task.getId() == id){
-				task.setDescription(newDesc);
-			}
-		});
+	public void update(int id, String newDesc) throws NoSuchElementException {
+		if(this.includes(id)) {
+			tasks.stream()
+			.forEach(task -> {
+				if (task.getId() == id){
+					task.setDescription(newDesc);
+				}
+			});
+		} else {
+			throw new NoSuchElementException();
+		}
+
 	}
 	/**
 	 * Updates the status of an existing task
 	 * @param id
 	 * @param newStat
+	 * @exception NoSuchElementException if given id does not exist in task set
 	 */
-	public void updateStatus(int id, Status newStat) {
-		tasks.stream()
-		.forEach(task -> {
-			if (task.getId() == id){
-				task.setStatus(newStat);
-			}
-		});
+	public void updateStatus(int id, Status newStat) throws NoSuchElementException{
+		if(this.includes(id)) {
+			tasks.stream()
+			.forEach(task -> {
+				if (task.getId() == id){
+					task.setStatus(newStat);
+				}
+			});
+		} else {
+			throw new NoSuchElementException();
+		}
+
 	}
 	
 	/**

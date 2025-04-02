@@ -49,6 +49,10 @@ public class App
     		}
     		break;
     	case("update"):
+    		if(args.length == 3) {
+    			int id = Integer.valueOf(args[1]).intValue();
+    			tasks.update(id, args[2]);
+    		}
     		break;
     	case("delete"):
     		break;
