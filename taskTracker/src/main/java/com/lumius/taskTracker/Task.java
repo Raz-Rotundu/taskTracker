@@ -2,6 +2,7 @@ package com.lumius.taskTracker;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,10 +14,8 @@ import com.google.gson.GsonBuilder;
 public class Task {
 //	Formatting date/time to readable string
 	public static DateTimeFormatter taskDateFormat= DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");	
-	
-	private static int numTasks = 0;
-	
-	private int id;
+		
+	private String id;
 	private String description;
 	private Status status;
 	private LocalDateTime timeCreated;
@@ -34,8 +33,8 @@ public class Task {
 		this.timeCreated = LocalDateTime.now();
 		this.timeModified = LocalDateTime.now();
 		
-		this.id = numTasks;
-		numTasks++;
+		this.id = UUID.randomUUID().toString().substring(0, 7);
+
 	}
 
 
@@ -43,7 +42,7 @@ public class Task {
 	 * Returns the unique identifier for the task
 	 * @return unique integer
 	 */
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 	
@@ -103,7 +102,7 @@ public class Task {
 	 */
 	public String toString(){
 		String bar = "-------------------------------------------------";
-		String outString = String.format("Id: %d%nStatus: %s%nTime Created: %s%nTime Modified: %s%nDescription: %s%n" + bar, id, status, timeCreated.format(taskDateFormat), timeModified.format(taskDateFormat), description);
+		String outString = String.format("Id: %s%nStatus: %s%nTime Created: %s%nTime Modified: %s%nDescription: %s%n" + bar, id, status, timeCreated.format(taskDateFormat), timeModified.format(taskDateFormat), description);
 		return outString;
 	}
 }

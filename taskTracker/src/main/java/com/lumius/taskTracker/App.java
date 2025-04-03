@@ -3,6 +3,7 @@ package com.lumius.taskTracker;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,7 +57,10 @@ public class App
     		System.out.println("Save File Found!");
     		try {
     			String json = Files.readAllLines(savePath).getFirst();
-    			tasks = new PersistenceWrapper(gson.fromJson(json, TaskSet.class), savePath);
+        		tasks = new PersistenceWrapper(gson.fromJson(json, TaskSet.class), savePath);
+    		}
+    		catch (NoSuchElementException n) {
+    			tasks = new PersistenceWrapper(new TaskSet(), savePath);
     		}
     		catch (IOException e) {
     			System.out.println("IO error when reading save file");
@@ -75,23 +79,27 @@ public class App
             	switch(args[0].toLowerCase()) {
             	case("add"):
             		if(args.length == 2) {
-            			tasks.add(args[1]);
+            			String id = tasks.add(args[1]);
+            			System.out.printf("Task added successfully (ID:%s)", id);
+            			
             		} else {
             			System.out.println(errorMsgCrud);
             		}
             		break;
             	case("update"):
             		if(args.length == 3) {
-            			int id = Integer.valueOf(args[1]).intValue();
+            			String id = args[1];
             			tasks.update(id, args[2]);
+            			System.out.printf("%s -> %s", id, args[2]);
             		} else {
             			System.out.println(errorMsgCrud);
             		}
             		break;
             	case("delete"):
             		if(args.length == 2) {
-            			int id = Integer.valueOf(args[1]).intValue();
+            			String id = args[1];
             			tasks.remove(id);
+            			System.out.printf("Task %s removed successfully", id);
             		} else {
             			System.out.println(errorMsgCrud);
             		}
@@ -110,22 +118,27 @@ public class App
             				tasks.printInProgress();
             				break;
             			}
+            		} else if (args.length == 1) {
+            			tasks.printAll();
             		} else {
             			System.out.println(errorMsgList);
             		}
             		break;
             	case("mark-done"):
             		if(args.length == 2 && args[0].toLowerCase() == "mark-done") {
-            			int id = Integer.valueOf(args[1]).intValue();
+            			String id = args[1];
             			tasks.updateStatus(id, Status.Complete);
+            			System.out.printf("(%s) -> Status: Complete");
             		} else {
             			System.out.println(errorMsgStatus);
             		}
             		break;
             	case("mark-in-progress"):
-            		if(args.length == 2 && args[0].toLowerCase() == "marks-in-progress") {
-            			int id = Integer.valueOf(args[1]).intValue();
+            		if(args.length == 2 && args[0].toLowerCase() == "mark-in-progress") {
+            			String id = args[1];
             			tasks.updateStatus(id, Status.InProgress);
+            			System.out.printf("(%s) -> Status: InProgress");
+            			
             		} else {
             			System.out.println(errorMsgStatus);
             		}

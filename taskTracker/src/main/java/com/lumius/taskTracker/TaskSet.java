@@ -26,16 +26,19 @@ public class TaskSet implements TasksInterface {
 	 * @param id The ID of the task searched for
 	 * @return boolean, if the given ID is in the set
 	 */
-	public boolean includes(int id) {
+	public boolean includes(String id) {
 		return tasks.stream()
 				.anyMatch(task -> task.getId() == id);
 	}
 	/**
 	 * Add a given task to the task set
 	 * @param t A task object
+	 * @return generated ID of the task
 	 */
-	public void add(String t) {
-		this.tasks.add(new Task(t));
+	public String add(String t) {
+		Task task = new Task(t);
+		this.tasks.add(task);
+		return task.getId();
 	}
 	
 	/**
@@ -43,7 +46,7 @@ public class TaskSet implements TasksInterface {
 	 * @param id the Id of an existing task
 	 * @exception NoSuchElementException if given id does not exist in task set
 	 */
-	public void remove(int id) throws NoSuchElementException {
+	public void remove(String id) throws NoSuchElementException {
 		if(this.includes(id)) {
 			this.tasks = tasks.stream()
 					.filter(task -> task.getId() != id)
@@ -51,7 +54,6 @@ public class TaskSet implements TasksInterface {
 		} else {
 			throw new NoSuchElementException();
 		}
-
 	}
 	
 	/**
@@ -60,7 +62,7 @@ public class TaskSet implements TasksInterface {
 	 * @param newDesc The new description for the task
 	 * @exception NoSuchElementException if given id does not exist in task set
 	 */
-	public void update(int id, String newDesc) throws NoSuchElementException {
+	public void update(String id, String newDesc) throws NoSuchElementException {
 		if(this.includes(id)) {
 			tasks.stream()
 			.forEach(task -> {
@@ -79,7 +81,7 @@ public class TaskSet implements TasksInterface {
 	 * @param newStat
 	 * @exception NoSuchElementException if given id does not exist in task set
 	 */
-	public void updateStatus(int id, Status newStat) throws NoSuchElementException {
+	public void updateStatus(String id, Status newStat) throws NoSuchElementException {
 		if(this.includes(id)) {
 			tasks.stream()
 			.forEach(task -> {
@@ -107,35 +109,64 @@ public class TaskSet implements TasksInterface {
 	 * Prints out all tasks currently in the set
 	 */
 	public void printAll() {
-		this.tasks.stream()
-		.forEach(task -> System.out.println(task));
+		if (this.size() != 0) {
+			this.tasks.stream()
+			.forEach(task -> System.out.println(task));
+		} else {
+			System.out.println("No tasks in list");
+		}
 	}
 	
 	/**
 	 * Prints out all tasks marked "Complete"
 	 */
 	public void printComplete() {
-		this.tasks.stream()
-		.filter(task -> task.getStatus() == Status.Complete)
-		.forEach(task -> System.out.println(task));
+		int c = (int)this.tasks.stream()
+				.filter(task -> task.getStatus() == Status.Complete)
+				.count();
+		if(c != 0) {
+			this.tasks.stream()
+			.filter(task -> task.getStatus() == Status.Complete)
+			.forEach(task -> System.out.println(task));
+		} else {
+			System.out.println("No tasks complete");
+		}
 	}
 	
 	/**
 	 * Prints out all tasks marked "NotStarted"
 	 */
 	public void printNotStarted() {
-		this.tasks.stream()
-		.filter(task -> task.getStatus() == Status.NotStarted)
-		.forEach(task -> System.out.println(task));
+		int c = (int)this.tasks.stream()
+				.filter(task -> task.getStatus() == Status.NotStarted)
+				.count();
+		if (c != 0) {
+			this.tasks.stream()
+			.filter(task -> task.getStatus() == Status.NotStarted)
+			.forEach(task -> System.out.println(task));
+		} else {
+			System.out.println("No tasks to do");
+		}
+
 	}
 	
 	/**
 	 * Prints out all tasks marked "InProgress"
 	 */
 	public void printInProgress() {
-		this.tasks.stream()
-		.filter(task -> task.getStatus() == Status.InProgress)
-		.forEach(task -> System.out.println(task));
+		int c = (int)this.tasks.stream()
+				.filter(task -> task.getStatus() == Status.InProgress)
+				.count();
+		 
+		if (c != 0) {
+			this.tasks.stream()
+			.filter(task -> task.getStatus() == Status.InProgress)
+			.forEach(task -> System.out.println(task));
+
+		} else {
+			System.out.println("No tasks in progress");
+		}
+
 	}
 
 	/**

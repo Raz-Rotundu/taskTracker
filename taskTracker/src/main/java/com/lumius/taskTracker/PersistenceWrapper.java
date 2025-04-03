@@ -32,52 +32,40 @@ public class PersistenceWrapper extends TsWrapper {
 	
 	private void updateFile() {
 		try {
-			Files.createFile(path);
+			Files.write(path, gson.toJson(wrappee).getBytes());
 		}
-		catch (FileAlreadyExistsException x) {
-			System.out.println("File found!");
-		}
-		catch (IOException e) {
-			System.out.println("IO error when looking for file");
+		catch (IOException e){
+			System.out.println("IO exception when writing to file");
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				Files.write(path, gson.toJson(wrappee).getBytes());
-			}
-			catch (IOException e){
-				System.out.println("IO exception when writing to file");
-				e.printStackTrace();
-			}
-
-		}
 	}
 	
 	@Override
-	public void add(String t) {
-		super.add(t);
+	public String add(String t) {
+		String  s = super.add(t);
 		updateFile();
+		return s;
 		
 		
 
 	}
 	
 	@Override
-	public void remove(int id) throws NoSuchElementException {
+	public void remove(String id) throws NoSuchElementException {
 		super.remove(id);
 		updateFile();
 
 	}
 	
 	@Override
-	public void update(int id, String newDesc) throws NoSuchElementException {
+	public void update(String id, String newDesc) throws NoSuchElementException {
 		super.update(id, newDesc);
 		updateFile();
 
 	}
 	
 	@Override
-	public void updateStatus(int id, Status newStat) throws NoSuchElementException {
+	public void updateStatus(String id, Status newStat) throws NoSuchElementException {
 		super.updateStatus(id, newStat);
 		updateFile();
 

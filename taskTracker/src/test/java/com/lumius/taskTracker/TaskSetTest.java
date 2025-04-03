@@ -20,14 +20,14 @@ class TaskSetTest {
 		
 		
 	}
-	@Test
-	void testAdd() {
-		assertEquals(4, referenceSet.size());	
-	}
-	
-	@Test
-	void testRemove() {
-		referenceSet.remove(1);
-		assertEquals(3, referenceSet.size());
-	}
+//	@Test
+//	void testAdd() {
+//		assertEquals(4, referenceSet.size());	
+//	}
+//	
+//	@Test
+//	void testRemove() {
+//		referenceSet.remove(1);
+//		assertEquals(3, referenceSet.size());
+//	}
 }

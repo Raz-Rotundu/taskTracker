@@ -11,30 +11,30 @@ public class TsWrapper implements TasksInterface {
 	}
 	
 	@Override
-	public boolean includes(int id) {
+	public boolean includes(String id) {
 		return wrappee.includes(id);
 	}
 
 	@Override
-	public void add(String t) {
-		wrappee.add(t);
+	public String add(String t) {
+		return wrappee.add(t);
 
 	}
 
 	@Override
-	public void remove(int id) throws NoSuchElementException {
+	public void remove(String id) throws NoSuchElementException {
 		wrappee.remove(id);
 
 	}
 
 	@Override
-	public void update(int id, String newDesc) throws NoSuchElementException {
+	public void update(String id, String newDesc) throws NoSuchElementException {
 		wrappee.update(id, newDesc);
 
 	}
 
 	@Override
-	public void updateStatus(int id, Status newStat) throws NoSuchElementException {
+	public void updateStatus(String id, Status newStat) throws NoSuchElementException {
 		wrappee.updateStatus(id, newStat);
 
 	}
