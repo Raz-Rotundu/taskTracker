@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 
 public class TsWrapper implements TasksInterface {
 	
-	TaskSet wrappee;
+	protected TaskSet wrappee;
 
 	public TsWrapper(TaskSet t) {
 		wrappee = t;
