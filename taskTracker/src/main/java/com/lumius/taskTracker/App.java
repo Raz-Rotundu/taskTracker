@@ -125,19 +125,19 @@ public class App
             		}
             		break;
             	case("mark-done"):
-            		if(args.length == 2 && args[0].toLowerCase() == "mark-done") {
+            		if(args.length == 2 && args[0].toLowerCase().equals("mark-done")) {
             			String id = args[1];
             			tasks.updateStatus(id, Status.Complete);
-            			System.out.printf("(%s) -> Status: Complete");
+            			System.out.printf("(%s) -> Status: Complete", id);
             		} else {
             			System.out.println(errorMsgStatus);
             		}
             		break;
             	case("mark-in-progress"):
-            		if(args.length == 2 && args[0].toLowerCase() == "mark-in-progress") {
+            		if(args.length == 2 && args[0].toLowerCase().equals("mark-in-progress")) {
             			String id = args[1];
             			tasks.updateStatus(id, Status.InProgress);
-            			System.out.printf("(%s) -> Status: InProgress");
+            			System.out.printf("(%s) -> Status: InProgress", id);
             			
             		} else {
             			System.out.println(errorMsgStatus);

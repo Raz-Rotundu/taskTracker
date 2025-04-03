@@ -47,9 +47,9 @@ public class TaskSet implements TasksInterface {
 	 * @exception NoSuchElementException if given id does not exist in task set
 	 */
 	public void remove(String id) throws NoSuchElementException {
-		if(this.includes(id)) {
+		if(this.taskPresent(id)) {
 			this.tasks = tasks.stream()
-					.filter(task -> task.getId() != id)
+					.filter(task -> !task.getId().equals(id))
 					.collect(Collectors.toCollection(HashSet::new));
 		} else {
 			throw new NoSuchElementException();
@@ -63,13 +63,15 @@ public class TaskSet implements TasksInterface {
 	 * @exception NoSuchElementException if given id does not exist in task set
 	 */
 	public void update(String id, String newDesc) throws NoSuchElementException {
-		if(this.includes(id)) {
-			tasks.stream()
-			.forEach(task -> {
-				if (task.getId() == id){
-					task.setDescription(newDesc);
-				}
-			});
+		if(this.taskPresent(id)) {
+			this.tasks = tasks.stream()
+					.map(task -> {
+						if (task.getId().equals(id)) {
+							task.setDescription(newDesc);
+						}
+						return task;
+					})
+					.collect(Collectors.toCollection(HashSet::new));
 		} else {
 			throw new NoSuchElementException();
 		}
@@ -81,14 +83,16 @@ public class TaskSet implements TasksInterface {
 	 * @param newStat
 	 * @exception NoSuchElementException if given id does not exist in task set
 	 */
-	public void updateStatus(String id, Status newStat) throws NoSuchElementException {
-		if(this.includes(id)) {
-			tasks.stream()
-			.forEach(task -> {
-				if (task.getId() == id){
-					task.setStatus(newStat);
-				}
-			});
+	public void updateStatus(String id, Status newStat) throws NoSuchElementException {	
+		if(this.taskPresent(id)) {
+			this.tasks = tasks.stream()
+					.map(task -> {
+						if (task.getId().equals(id)) {
+							task.setStatus(newStat);
+						}
+						return task;
+					})
+					.collect(Collectors.toCollection(HashSet::new));
 		} else {
 			throw new NoSuchElementException();
 		}
@@ -169,6 +173,12 @@ public class TaskSet implements TasksInterface {
 
 	}
 
+	private boolean taskPresent(String id) {
+		boolean present =  tasks.stream()
+				.map(t -> t.getId())
+				.anyMatch(t -> t.equals(id));
+		return present;
+	}
 	/**
 	 * Renders set to string
 	 * @return string equivalent of printAll
