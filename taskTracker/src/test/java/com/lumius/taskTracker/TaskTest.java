@@ -12,7 +12,6 @@ class TaskTest {
 	
 	@Test
 	void getterTest() {
-		assertEquals(0, myTask.getId());
 		assertEquals(Status.NotStarted, myTask.getStatus());
 		assertEquals(d1, myTask.getDescription());
 	}

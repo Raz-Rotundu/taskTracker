@@ -36,6 +36,28 @@
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
+       <!-- Maven Shade Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.6.0</version> <!-- You can specify the latest version -->
+            <executions>
+                <execution>
+                    <phase>package</phase> <!-- The phase when the plugin will execute -->
+                    <goals>
+                        <goal>shade</goal> <!-- Create a shaded (uber) JAR -->
+                    </goals>
+                    <configuration>
+                        <transformers>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <!-- Specify the main class to be run when the JAR is executed -->
+                                <mainClass>com.lumius.taskTrasker.App</mainClass> <!-- Replace with your main class -->
+                            </transformer>
+                        </transformers>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.4.0</version>
