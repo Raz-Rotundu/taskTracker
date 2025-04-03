@@ -49,8 +49,3 @@ The following commands are available:
 	<li>task-cli list in-progress</li>
 	
 </ul>
-
-## Dependencies
-todo
-## Installation
-todo
