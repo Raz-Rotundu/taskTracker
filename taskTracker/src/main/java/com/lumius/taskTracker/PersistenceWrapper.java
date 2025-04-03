@@ -13,7 +13,10 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 
 
-
+/**
+ * PersistenceWrapper -- A wrapper for the TaskSet class that handles adds file writing behaviour to the mutator functions
+ * @author Razvan Rotundu
+ */
 public class PersistenceWrapper extends TsWrapper {
 	
 //	Custom JSON builder with LocalDateTime adaptation

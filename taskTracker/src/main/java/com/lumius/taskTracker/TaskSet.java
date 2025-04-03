@@ -172,6 +172,12 @@ public class TaskSet implements TasksInterface {
 		}
 
 	}
+	
+	/**
+	 * Checks if task is present in the set of the instance object
+	 * @param id
+	 * @return boolean if the given id is a task present in the set
+	 */
 
 	private boolean taskPresent(String id) {
 		boolean present =  tasks.stream()
