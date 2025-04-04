@@ -1,5 +1,20 @@
 # Task Tracker Application
 A command line application to create and manage a to-do list
+
+## Dependencies
+<ul>
+<li>Java: JRE and/or JDK 17 or later must be installed on the machine</li>
+<li>Maven build tool</li>
+</ul>
+
+## Running the program
+<ol>
+<li>Navigate into the project directory (taskTracker) and run the following command: mvn package</li>
+<li>There should now be a JAR file in the target directory named "taskTracker-1.0.0.jar"</li>
+<li>Run the jar file with the following command: java -jar taskTracker-1.0.0.jar \<rest of args here\></li>
+</ol>
+For valid args, see Usage section
+
 ## Features
 <ul>
 	<li>Add, update, or delete tasks</li>

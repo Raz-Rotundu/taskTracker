@@ -6,7 +6,7 @@
 
   <groupId>com.lumius</groupId>
   <artifactId>taskTracker</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
 
   <name>taskTracker</name>
   <description>A simple taskTracker.</description>
@@ -34,7 +34,6 @@
   </dependencies>
 
   <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
        <!-- Maven Shade Plugin -->
         <plugin>
@@ -51,7 +50,7 @@
                         <transformers>
                             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                 <!-- Specify the main class to be run when the JAR is executed -->
-                                <mainClass>com.lumius.taskTrasker.App</mainClass> <!-- Replace with your main class -->
+                                <mainClass>com.lumius.taskTracker.App</mainClass> <!-- Replace with your main class -->
                             </transformer>
                         </transformers>
                     </configuration>
@@ -96,7 +95,6 @@
           <version>3.1.2</version>
         </plugin>
       </plugins>
-    </pluginManagement>
   </build>
 
   <reporting>

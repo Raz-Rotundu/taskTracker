@@ -33,16 +33,16 @@ public class App
 	
 	
 //	Error message for incorrect first parameter
-	private static final String errorMsgFirst = "Usage: First parameter should be one of:"
-			+ "%n%t add%n%tupdate %n%t delete %n%tlist %n%tmark-done %n%tmark-in-progress";
+	private static final String errorMsgFirst = String.format("First parameter should be one of:"
+			+ "%n\t add%n\t update %n\t delete %n\t list %n\t mark-done %n\t mark-in-progress"); 
 //  Error message for incorrect list usage
 	private static final String errorMsgList = "Usage: list (done|todo|in-progress)";
 //	Error message for incorrect status update
 	private static final String errorMsgStatus = "Usage: (mark-done|mark-in-progress) taskId";
 //	Error message for incorrect CRUD operations
-	private static final String errorMsgCrud = "Usage:%n%t add descriptionString"
-			+ "%n%t update ID newDescription"
-			+ "%n%t delete ID";
+	private static final String errorMsgCrud = String.format("Usage:%n\t add descriptionString"
+			+ "%n\t update ID newDescription"
+			+ "%n\t delete ID");
 	
 	
 	
@@ -74,13 +74,14 @@ public class App
     	finally {
     		if (args.length == 0 || args.length > 3) {
         		System.out.println(errorMsgFirst);
+        		return;
         	}
         	try {
             	switch(args[0].toLowerCase()) {
             	case("add"):
             		if(args.length == 2) {
             			String id = tasks.add(args[1]);
-            			System.out.printf("Task added successfully (ID:%s)", id);
+            			System.out.printf("Task added successfully (ID:%s)%n", id);
             			
             		} else {
             			System.out.println(errorMsgCrud);
@@ -90,7 +91,7 @@ public class App
             		if(args.length == 3) {
             			String id = args[1];
             			tasks.update(id, args[2]);
-            			System.out.printf("%s -> %s", id, args[2]);
+            			System.out.printf("%s -> %s%n", id, args[2]);
             		} else {
             			System.out.println(errorMsgCrud);
             		}
@@ -99,7 +100,7 @@ public class App
             		if(args.length == 2) {
             			String id = args[1];
             			tasks.remove(id);
-            			System.out.printf("Task %s removed successfully", id);
+            			System.out.printf("Task %s removed successfully%n", id);
             		} else {
             			System.out.println(errorMsgCrud);
             		}
@@ -128,7 +129,7 @@ public class App
             		if(args.length == 2 && args[0].toLowerCase().equals("mark-done")) {
             			String id = args[1];
             			tasks.updateStatus(id, Status.Complete);
-            			System.out.printf("(%s) -> Status: Complete", id);
+            			System.out.printf("(%s) -> Status: Complete%n", id);
             		} else {
             			System.out.println(errorMsgStatus);
             		}
@@ -137,7 +138,7 @@ public class App
             		if(args.length == 2 && args[0].toLowerCase().equals("mark-in-progress")) {
             			String id = args[1];
             			tasks.updateStatus(id, Status.InProgress);
-            			System.out.printf("(%s) -> Status: InProgress", id);
+            			System.out.printf("(%s) -> Status: InProgress%n", id);
             			
             		} else {
             			System.out.println(errorMsgStatus);
