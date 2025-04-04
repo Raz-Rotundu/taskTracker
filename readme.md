@@ -9,8 +9,9 @@ A command line application to create and manage a to-do list
 
 ## Running the program
 <ol>
-<li>Navigate into the project directory (taskTracker) and run the following command: mvn package</li>
-<li>There should now be a JAR file in the target directory named "taskTracker-1.0.0.jar"</li>
+<li>Navigate into the project directory (taskTracker) and run the following command: mvn package </li>
+
+<li>There should now be a JAR file in the target directory named "taskTracker-1.0.0.jar" </li>
 <li>Run the jar file with the following command: java -jar taskTracker-1.0.0.jar \<rest of args here\></li>
 </ol>
 For valid args, see Usage section
@@ -30,28 +31,28 @@ The following commands are available:
 
 **Adding a new task**
 <ul>
-	<li>task-cli add "Buy groceries"</li>
+	<li>java -jar taskTracker-1.0.0.jar add "Buy groceries"</li>
 	
 </ul>
 
 **Updating and deleting tasks** 
 <ul>
-	<li>task-cli update 1 "Buy groceries and cook dinner"</li>
-	<li>task-cli delete 1</li>
+	<li>java -jar taskTracker-1.0.0.jar update 1 "Buy groceries and cook dinner"</li>
+	<li>java -jar taskTracker-1.0.0.jar delete 1</li>
 	
 </ul>
 
 **Marking a task as in progress or done**
 <ul>
-	<li>task-cli mark-in-progress 1</li>
-	<li>task-cli mark-done 1</li>
+	<li>java -jar taskTracker-1.0.0.jar mark-in-progress 1</li>
+	<li>java -jar taskTracker-1.0.0.jar mark-done 1</li>
 	
 </ul>
 
 
 **Listing all tasks**
 <ul>
-	<li>task-cli list</li>
+	<li>java -jar taskTracker-1.0.0.jar list</li>
 	
 </ul>
 
@@ -59,8 +60,8 @@ The following commands are available:
 
 **Listing tasks by status**
 <ul>
-	<li>task-cli list done</li>
-	<li>task-cli list todo</li>
-	<li>task-cli list in-progress</li>
+	<li>java -jar taskTracker-1.0.0.jar list done</li>
+	<li>java -jar taskTracker-1.0.0.jar list todo</li>
+	<li>java -jar taskTracker-1.0.0.jar list in-progress</li>
 	
 </ul>
